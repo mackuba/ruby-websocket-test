@@ -88,6 +88,11 @@ if $PROGRAM_NAME == __FILE__
 
   stream = FirehoseStream.new(ARGV[1])
 
+  trap("SIGINT") {
+    puts "Stopping..."
+    stream.stop
+  }
+
   case ARGV[0]
   when 'async'
     stream.start_async
